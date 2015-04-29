@@ -8,10 +8,10 @@ var ajax, pages, scaffold;
 var cache = {};
 
 template.pages = [
-  {name: 'About Me', hash: 'AboutMe', url: 'about.html'},
-  {name: 'Services', hash: 'Services', url: 'services.html'},
-  {name: 'Pictures', hash: 'Pictures', url: 'pictures.html'},
-  {name: 'Contact', hash: 'Contact', url: 'contact.html'}
+  {name: 'About Me', hash: 'AboutMe', url: '/pages/about.html'},
+  {name: 'Services', hash: 'Services', url: '/pages/services.html'},
+  {name: 'Pictures', hash: 'Pictures', url: '/pages/pictures.html'},
+  {name: 'Contact', hash: 'Contact', url: '/pages/contact.html'}
 ];
 
 template.addEventListener('template-bound', function(e) {
