@@ -1,8 +1,6 @@
 (function() {
 "use strict";
-
 var DEFAULT_ROUTE = 'AboutMe';
-
 var template = document.querySelector('#t');
 var ajax, pages, scaffold;
 var cache = {};
@@ -43,11 +41,9 @@ template.keyHandler = function(e, detail, sender) {
   }
 
   switch (detail.key) {
-    case 'left':
     case 'up':
       pages.selectPrevious();
       break;
-    case 'right':
     case 'down':
       pages.selectNext();
       break;
@@ -65,8 +61,6 @@ template.cyclePages = function(e, detail, sender) {
 
   e.shiftKey ? sender.selectPrevious(true) : sender.selectNext(true);
 };
-
-
 
 template.menuItemSelected = function(e, detail, sender) {
   if (detail.isSelected) {
@@ -87,23 +81,12 @@ template.ajaxLoad = function(e, detail, sender) {
   e.preventDefault(); // prevent link navigation.
 };
 
-
-
 template.onResponse = function(e, detail, sender) {
   var article = detail.response.querySelector('#content');
-
-
-
-  // Fix up image paths to not be local.
-  [].forEach.call(article.querySelectorAll('img'), function(img) {
-    img.setAttribute('src', img.src);
-  });
-
-  var html = article.innerHTML;
-
-  cache[ajax.url] = html; // Primitive caching by URL.
-
-  this.injectBoundHTML(html, pages.selectedItem.firstElementChild);
+  var pages = document.querySelector('#pages');
+  this.injectBoundHTML(article.innerHTML, pages.selectedItem.firstElementChild);
 };
 
+       
+     
 })();

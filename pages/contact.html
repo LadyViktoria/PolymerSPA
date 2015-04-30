@@ -1,5 +1,63 @@
 <!DOCTYPE html>
 <div id="content">
-<h1>Contact content</h1>
-<div>contactform</div>
+<h1>Contact Form</h1>
+<head>
+<link rel="import" href="../bower_components/ajax-form/ajax-form.html">
+<script src="../bower_components/ajax-form/demo_resources/alertify.min.js"></script>
+<link rel="stylesheet" href="../bower_components/ajax-form/demo_resources/alertify.core.css" />
+<link rel="stylesheet" href="../bower_components/ajax-form/demo_resources/alertify.default.css" />
+</head>		
+            <form id="ContactForm" is="ajax-form" action="../contact_me.php" method="post">
+			<div>
+			<paper-input-decorator floatingLabel label="Enter your name" type="text" error="input is required!" autoValidate>
+            <input id="input1" name="name" is="core-input" required>
+			</paper-input-decorator>
+			</div>
+			<div>
+			<paper-input-decorator floatingLabel label="Enter your email address" type="text" error="input is required!" autoValidate>
+            <input id="input2" name="email" is="core-input" required>
+			</paper-input-decorator>
+			</div>
+			<div> 
+			<paper-input-decorator label="Enter your message" floatingLabel error="input is required!" autoValidate>
+			<paper-autogrow-textarea>
+			<textarea id="input3" name="message" is="core-input" required></textarea>
+			</paper-autogrow-textarea>
+			</paper-input-decorator>			
+			</div>
+			<div>
+			<paper-button id="submitButton">
+			<core-icon icon="mail"></core-icon>
+			Submit
+			</paper-button>
+			</div>
+			</paper-button> 
+            </form>
+<script>
+   document.getElementById('submitButton').addEventListener('click', function() {
+      document.forms[0].submit(); 
+   });
+</script>
+ <script>
+        (function() {
+            var form = document.querySelectorAll('form')[0],
+                content = document.getElementById('content');
+            form.addEventListener('invalid', function() {
+                alertify.error('Some form fields are invalid!');
+            });
+            form.addEventListener('submitting', function(event) {
+				alertify.success('Sending messege');
+            });			
+            form.addEventListener('submitted', function(event) {             
+                if (event.detail.status > 299) {
+					alertify.error('Submission failed!  Please try again.');
+                }
+                else {
+					alertify.success('Submission sucessfull.');
+					document.getElementById("ContactForm").reset();
+                }
+            });            
+        }());
+    </script>
+</body>		
 </div>
